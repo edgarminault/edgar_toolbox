@@ -1,1 +1,1 @@
-web: pip install . -U && edgar_toolbox-run
+web: sh setup.sh && streamlit run app.py
