@@ -1,7 +1,5 @@
 # -*- coding: UTF-8 -*-
 
-from os.path import split
-import pandas as pd
 import sys
 import requests
 
@@ -35,16 +33,31 @@ def multiple_city_filter(cities):
     return search_city(query)
 
 def weather_forecast(city):
-    woeid = search_city_code(city)
+    woeid = search_city_code(query)
     weather_url = f'{BASE_URI}/api/location/{woeid}'
     weather_forecast_json = requests.get(weather_url).json()
-    return pd.DataFrame(weather_forecast_json['consolidated_weather'])
 
-if __name__ == "__main__":
-    # For introspections purpose to quickly get this functions on ipython
-    import edgar_toolbox
-    data = weather_forecast('Paris')
-    data =pd.DataFrame(data)
-    data_bis = search_city_code('London')
-    print(data.shape)
-    print(data_bis)
+    return weather_forecast_json['consolidated_weather']
+
+def main():
+    query = input("City?\n> ")
+    city = search_city(query)
+    if isinstance(city, list):
+        city = multiple_city_filter(city)
+        print("Hey")
+    woeid = city['woeid']
+    print(city['title'])
+    for weather in weather_forecast(woeid):
+        date = weather['applicable_date']
+        state = weather['weather_state_name']
+        avg_temp = int(weather['the_temp'])
+        forecast = f'{date}: {state} ({avg_temp}°C)'
+        print(forecast)
+
+if __name__ == '__main__':
+    try:
+        while True:
+            main()
+    except KeyboardInterrupt:
+        print('\nGood_bye!')
+        sys.exit(0)
