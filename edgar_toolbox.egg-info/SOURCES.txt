@@ -7,6 +7,7 @@ setup.py
 .github/workflows/pythonpackage.yml
 edgar_toolbox/__init__.py
 edgar_toolbox/lib.py
+edgar_toolbox/weather.py
 edgar_toolbox.egg-info/PKG-INFO
 edgar_toolbox.egg-info/SOURCES.txt
 edgar_toolbox.egg-info/dependency_links.txt
