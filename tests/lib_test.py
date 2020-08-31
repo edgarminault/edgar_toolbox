@@ -5,15 +5,15 @@ import os
 import edgar_toolbox
 import pandas as pd
 # Import from our lib
-from edgar_toolbox.lib import clean_data
+from edgar_toolbox.lib import get_data, data_projection
 import pytest
 
 
-def test_clean_data():
-    datapath = os.path.dirname(os.path.abspath(edgar_toolbox.__file__)) + '/data'
-    df = pd.read_csv('{}/data.csv.gz'.format(datapath))
-    first_cols = ['id', 'civility', 'birthdate', 'city', 'postal_code', 'vote_1']
-    assert list(df.columns)[:6] == first_cols
-    assert df.shape == (999, 142)
-    out = clean_data(df)
-    assert out.shape == (985, 119)
+def test_get_data():
+    faces = get_data()
+    assert faces.images.shape == (1288, 50, 37)
+    assert faces.data.shape == (1288, 1850)
+
+def test_data_projection(input):
+    faces = get_data()
+    assert data_projection(faces).shape == (1288, 150)
