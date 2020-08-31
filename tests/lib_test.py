@@ -5,7 +5,7 @@ import os
 import edgar_toolbox
 import pandas as pd
 # Import from our lib
-from edgar_toolbox.lib import get_data, data_projection
+from edgar_toolbox.lib import get_data, data_projection, data_reconstruction
 import pytest
 
 
@@ -17,3 +17,8 @@ def test_get_data():
 def test_data_projection():
     faces = get_data()
     assert data_projection(faces)[0].shape == (1288, 150)
+
+def test_data_reconstruction():
+    faces = get_data()
+    a,b = data_projection(faces)
+    assert data_reconstruction(a,b).shape == (1288, 1850)
