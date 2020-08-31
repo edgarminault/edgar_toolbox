@@ -5,7 +5,8 @@ pandas
 pytest
 coverage
 flake8
-black
 yapf
 python-gitlab
 twine
+streamlit
+requests
