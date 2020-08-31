@@ -6,6 +6,7 @@ pytest
 coverage
 flake8
 yapf
+black
 python-gitlab
 twine
 streamlit
