@@ -14,6 +14,6 @@ def test_get_data():
     assert faces.images.shape == (1288, 50, 37)
     assert faces.data.shape == (1288, 1850)
 
-def test_data_projection(input):
+def test_data_projection():
     faces = get_data()
-    assert data_projection(faces).shape == (1288, 150)
+    assert data_projection(faces)[0].shape == (1288, 150)
